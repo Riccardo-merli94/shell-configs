@@ -1,0 +1,96 @@
+{
+  "$schema": "https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/schema.json",
+  "blocks": [
+    {
+      "alignment": "left",
+      "segments": [
+        {
+          "foreground": "#8dd184",
+          "style": "plain",
+          "template": "{{ .UserName }}|",
+          "type": "session"
+        },
+        {
+          "foreground": "#f1fdef",
+          "properties": {
+            "style": "agnoster_full"
+          },
+          "style": "plain",
+          "template": "[{{ .Path }}] ",
+          "type": "path"
+        },
+        {
+          "foreground": "#7FD5EA",
+          "style": "powerline",
+          "template": "(\ufcd1{{ if .Error }}{{ .Error }}{{ else }}{{ .Full }}{{ end }}) ",
+          "type": "go"
+        },
+        {
+          "foreground": "#cbce32",
+          "style": "powerline",
+          "template": "(\ue235 {{ if .Error }}{{ .Error }}{{ else }}{{ if .Venv }}{{ .Venv }} {{ end }}{{ .Full }}{{ end }}) ",
+          "type": "python"
+        },
+        {
+          "foreground": "#8dd184",
+          "foreground_templates": [
+            "{{ if  (.Working.Changed) }}#ce323a{{ end }}",
+            "{{ if  (.Staging.Changed) }}#cbce32{{ end }}",
+            "{{ if and (gt .Ahead 0) (gt .Behind 0) }}#FFCC80{{ end }}",
+            "{{ if gt .Ahead 0 }}#B388FF{{ end }}",
+            "{{ if gt .Behind 0 }}#B388FB{{ end }}"
+          ],
+          "properties": {
+            "fetch_status": true,
+            "fetch_stash_count": true,
+            "fetch_upstream_icon": true,
+            "branch_icon": "",
+            "untracked_modes": {
+              "/Users/user/Projects/oh-my-posh/": "no"
+            }
+          },
+          "style": "plain",
+          "template": "{{ .UpstreamIcon }}{{ .HEAD }}{{if .BranchStatus }}{{ end }}{{ if .Working.Changed }} {{ .Working.String }}{{ end }}{{ if and (.Working.Changed) (.Staging.Changed) }}|{{ end }}{{ if .Staging.Changed }} {{ .Staging.String }}{{ end }}{{ if gt .StashCount 0 }} {{ .StashCount }}{{ end }}\n~>",
+          "type": "git"
+        },
+        {
+          "foreground": "#757473",
+          "properties": {
+            "always_enabled": false,
+            "style": "austin",
+            "threshold": 100
+          },
+          "style": "powerline",
+          "template": "{{ .FormattedMs }}",
+          "type": "executiontime"
+        }
+      ],
+      "type": "prompt"
+    },
+    {
+      "alignment": "right",
+      "newline": true,
+      "segments": [
+        {
+          "foreground": "#193549",
+          "foreground_templates": [
+            "{{if eq \"Charging\" .State.String}}#64B5F6{{end}}",
+            "{{if eq \"Discharging\" .State.String}}#E36464{{end}}",
+            "{{if eq \"Full\" .State.String}}#66BB6A{{end}}"
+          ],
+          "properties": {
+            "charged_icon": "\ue22f ",
+            "charging_icon": "\ue234 ",
+            "discharging_icon": "\ue231 "
+          },
+          "style": "powerline",
+          "template": "[{{ if not .Error }}{{ .Icon }}{{ .Percentage }}{{ end }}{{ .Error }}\uf295]",
+          "type": "battery"
+        }
+      ],
+      "type": "prompt"
+    }
+  ],
+  "final_space": true,
+  "version": 2
+}
